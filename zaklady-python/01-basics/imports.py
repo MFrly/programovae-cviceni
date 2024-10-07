@@ -75,3 +75,29 @@ Použijte vhodné moduly v Pythonu (včetně jejich případné instalace) k tom
 K řešení prvního úkolu je možné doporučit importovat interní modul datetime
 Řešení dalších dvou úkolů můžete odvodit z příkladů v dokumentaci k externímu modulu dateutil - viz https://pypi.org/project/python-dateutil/
 """
+import datetime
+import calendar
+from dateutil import easter
+
+
+now = datetime.datetime.now()
+current_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
+print(f"Aktuální datum a čas: {current_datetime}")
+
+
+current_year = now.year
+print("\nDatum velikonoční neděle v následujících 5 letech:")
+for year in range(current_year, current_year + 6):
+    easter_date = easter.easter(year)
+    print(f"{year}: {easter_date}")
+
+
+def Vanoce_V_Nedeli(start_year):
+    while True:
+        if calendar.weekday(start_year, 12, 24) == 6:  
+            return start_year
+        start_year += 1
+
+nejblyzsi_vanocni_nedele = Vanoce_V_Nedeli(current_year)
+print(f"\nNejbližší rok, kdy bude Štědrý den v neděli: {nearest_sunday_christmas}")
+
