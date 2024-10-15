@@ -30,7 +30,13 @@ Některé objekty mohou mít explicitně přiřazené jméno, obecně označovan
 '''Úkol A'''
 #? Najděte na Internetu, jakými funkcemi lze v Pythonu zjistit
 #? a) typ objektu
+a = type (students_count), type(rating), type(is_published)
+print(a)
+
 #? b) identitu objektu (jeho adresu v paměti)
+a = id(students_count), id(rating), id(is_published)
+print(a)
+
 #? Ukažte to na příkladech proměnných students_count, rating, is_published a vypište výstupy do konzole
 
 # Numerické operátory
@@ -66,13 +72,28 @@ hexadecimal = 0x12c #Hexadecimal Literal
 
 '''Úkol B'''
 #? Vypište do poznámky všechny bitové operátory, které nabízí Python
+#&	a & b	 a
+#|	a | b	 nebo
+#^	a ^ b	 XOR (exclusive OR)
+#~	~a	     ne
+#<<	a << n	 levy shift
+#>>	a >> n	 pravy shift
 #? Do proměnné myself_binary uložte binární číslo vytvořené na základě osmi prvních znaků z vašeho jména a příjmení (souhláska = 1, samohláska 0)
+myself_binary = "10101011"
+print(myself_binary)
 #? Příklad - HildaDok: 10110101
 #? Vypište toto binární číslo v desítkové soustavě
+x=int(myself_binary, base=2)
+print(x)
 #? Pro toto binární číslo proveďte nejprve bitový posun o 2 bity vpravo, poté vypište výsledek v desítkové soustavě
+shifted_binary = int(myself_binary, base=2) >> 2 
+print(shifted_binary)
 #? Proveďte bitový součin hexadecimálního čísla "1A" a vašeho binárního čísla a opět vypište v desítkové soustavě
+hex_number = 0x1A
+bitwise_and = x & hex_number
+# Formátovaný výstup
 #? Výsledek zobrazte jako formátovaný řetězec - např. "Binární součin čísla 0b11010 a 0b10110101 je 0b10000"
-
+#print(f"Binární součin čísla {bin(hex_number)} a {bin(x)} je {bin(bitwise_and)}")
 
 '''Python plně podporuje operace v plovoucí řádové čárce (tj. desetinná čísla). 
 Operátor pracující s různými typy operandů si nejprve zkonvertuje celá čísla na čísla 
@@ -138,5 +159,4 @@ Speciální proměnná _ reprezentuje předešlý výsledek.
 Varování: Hodnota proměnné _ by nikdy neměla být modifikována uživatelem. 
 Pokud byste jí přiřadili hodnotu, vytvořili byste nezávislou lokální proměnnou se stejným jménem, 
 která by zakryla interní proměnnou s tímto chováním.'''
-
 
