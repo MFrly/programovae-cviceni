@@ -158,3 +158,51 @@ funkční kód, tím lepší).
 3. Vytvořte funkci, která vygeneruje náhodná hesla pro počet osob zadaný v parametru tak, aby heslo začínalo
    3 velkými písmeny, pokračovalo 3 malými písmeny, jedním speciálním znakem (-/+*) a končilo 3 náhodnými číslicemi.
 '''
+from datetime import datetime
+import random
+import string
+
+# 1. Převod českého data na databázový formát
+def ceske_na_databazove(datum_cesky):
+    datum_obj = datetime.strptime(datum_cesky, "%d. %m. %Y")
+    return datum_obj.strftime("%Y-%m-%d")
+
+# 2. Vytvoření identifikátorů pro Python a camelCase syntax
+def vytvor_identifikator(souslovi, styl='python'):
+    slova = souslovi.lower().split()
+    if styl == 'python':
+        return '_'.join(slova)
+    elif styl == 'camel':
+        return slova[0] + ''.join(slovo.capitalize() for slovo in slova[1:])
+    else:
+        return None
+
+# 3. Vytvoření náhodných hesel
+def vygeneruj_hesla(pocet_osob):
+    hesla = []
+    for _ in range(pocet_osob):
+        velka_pismena = ''.join(random.choice(string.ascii_uppercase) for _ in range(3))
+        mala_pismena = ''.join(random.choice(string.ascii_lowercase) for _ in range(3))
+        specialni_znak = random.choice('-+*')
+        cislice = ''.join(random.choice(string.digits) for _ in range(3))
+        heslo = velka_pismena + mala_pismena + specialni_znak + cislice
+        hesla.append(heslo)
+    return hesla
+
+# Testování
+# 1. Převod českého data
+datum_cesky = "12. 10. 2020"
+databazove_datum = ceske_na_databazove(datum_cesky)
+print("Databázový formát:", databazove_datum)
+
+# 2. Vytvoření identifikátoru
+souslovi = "To je proměnná v Pythonu"
+python_id = vytvor_identifikator(souslovi, 'python')
+camel_id = vytvor_identifikator(souslovi, 'camel')
+print("Identifikátor pro Python:", python_id)
+print("CamelCase identifikátor pro JS:", camel_id)
+
+# 3. Generování hesel
+pocet_osob = 5
+hesla = vygeneruj_hesla(pocet_osob)
+print("Vygenerovaná hesla:", hesla)
