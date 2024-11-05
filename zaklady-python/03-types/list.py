@@ -294,7 +294,19 @@ print(unique)
 # aby vznikl seznam n-tic (list of tuples) v podobě (cislo, znak).
 # Snažte se vždy o co nejzhuštěnější kód - ideálně na 1 řádku (+ další řádek s kontrolním výpisem proměnné)
 # import knihovny pro generování náhodných čísel
-from random import randint
+# Importování potřebné knihovny
+import random
+
+# Generování seznamů
+hundreds = [random.randint(100, 999) for _ in range(5)]
+ascii_chars = [chr(random.randint(65, 90)) for _ in range(10)]
+
+# Zkrácení seznamu ascii_chars na délku seznamu hundreds a jejich zkombinování
+combine = list(zip(hundreds, ascii_chars[:len(hundreds)]))
+
+# Výpis výsledku
+print(combine)
+
 
 print(f'\n*************************************\nCvičení 2\n*************************************')
 
@@ -302,11 +314,26 @@ print(f'\n*************************************\nCvičení 2\n******************
 
 # ??? 3. cvičení ???
 # a) Přidejte do listu persons ještě n-tice (tuples) dalších 2 žen a 2 mužů.
+# Původní seznam osob
+
+persons.extend([('Karel',22, 'muž'), ('Tomáš',33, 'muž'), ('Anna',44, 'žena'), ('Lucie',55, 'žena')])
+print(persons)
+print('\n')
+
 # b) Použijte seznam (list) persons a do proměnné women z něj pomocí lambda výrazu i comprehensions vyhledejte všechny ženy.
+
+women = list(filter(lambda person: person[2] == "žena", persons))
+print(women)
+
 # Seznam jmen žen poté vypište na samostatné řádky. Každý vypsaný řádek bude podtržen pomlčkami přesně podle délky jména.
 # c) Použijte seznam (list) persons a do proměnné ipeople z něj pomocí lambda výrazu i comprehensions vyhledejte všechny osoby
 # obsahující ve jméně písmeno "i". Obsah listu ipeople poté převeďte do podoby řetězce, který bude odpovídat struktuře csv souboru.
 # Kromě jména, věku a pohlaví v něm budou vypsána i čísla indexů (jako 1. sloupec). Oddělovačem bude středník.
 # Záznamy budou seřazeny podle věku (sestupně).
+
+ipeople = list(filter(lambda person: "i" in person[0].lower() , persons))
+csv ="".join([f"{i};{p[0]};{p[1]};{p[2]}\n"for i,p in enumerate(ipeople)])
+print(csv)
+
 
 print(f'\n*************************************\nCvičení 3\n*************************************')
